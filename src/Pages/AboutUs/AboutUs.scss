@@ -1,0 +1,974 @@
+// ==========================================================================
+// AboutUs.scss
+// ==========================================================================
+
+$bg: #0a0d0a;
+$bg-panel: #0f130f;
+$bg-card: #12160f;
+$border: #1f281c;
+$green: #7ed321;
+$green-soft: #9ee85a;
+$text: #f5f7f3;
+$text-muted: #a8b0a2;
+
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+// --------------------------------------------------------------------------
+// keyframes
+// --------------------------------------------------------------------------
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, -18px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba($green, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba($green, 0);
+  }
+}
+
+@keyframes pulseScale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes drawLine {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes growBar {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes arrowMove {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// --------------------------------------------------------------------------
+// base
+// --------------------------------------------------------------------------
+.about {
+  background: $bg;
+  color: $text;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &__breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 24px 0;
+    font-size: 14px;
+    color: $text-muted;
+    display: flex;
+    align-items: center;
+    animation: fadeInUp 0.6s $ease-out both;
+  }
+
+  &__breadcrumb-sep {
+    margin: 0 6px;
+    opacity: 0.6;
+  }
+
+  &__breadcrumb-current {
+    color: $text;
+  }
+}
+
+// --------------------------------------------------------------------------
+// HERO
+// --------------------------------------------------------------------------
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+
+  &__content {
+    opacity: 0;
+  }
+
+  &--visible &__content {
+    animation: fadeInLeft 0.8s $ease-out both;
+  }
+
+  &__eyebrow {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  &__heading {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  &__accent {
+    display: inline;
+    color: $green;
+    background: linear-gradient(90deg, $green, $green-soft, $green);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3.5s linear infinite;
+  }
+
+  &__text {
+    color: $text-muted;
+    font-size: 16px;
+    max-width: 460px;
+    margin-bottom: 24px;
+  }
+
+  &__badges {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  &__visual {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: radial-gradient(
+        circle at 75% 30%,
+        rgba($green, 0.35),
+        transparent 55%
+      ),
+      linear-gradient(135deg, #0d130c, #05070a 70%);
+    background-size: 200% 200%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  &--visible &__visual {
+    animation: popIn 0.9s $ease-out 0.15s both,
+      gradientShift 8s ease-in-out infinite 1s;
+  }
+
+  &__glow {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($green, 0.45), transparent 70%);
+    filter: blur(10px);
+    top: 15%;
+    right: 15%;
+    animation: floatSlow 6s ease-in-out infinite;
+  }
+
+  &__bars {
+    position: absolute;
+    right: 16%;
+    bottom: 14%;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  &__bar {
+    width: 20px;
+    background: rgba($green, 0.35);
+    border-radius: 3px;
+    transform-origin: bottom;
+    animation: growBar 0.9s $ease-out both;
+
+    &--1 { height: 60px; animation-delay: 0.5s; }
+    &--2 { height: 95px; animation-delay: 0.65s; }
+    &--3 { height: 130px; animation-delay: 0.8s; }
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 18%;
+    right: 12%;
+    width: 46px;
+    height: 46px;
+    border-top: 5px solid $green;
+    border-right: 5px solid $green;
+    transform: rotate(45deg);
+    animation: arrowMove 2.2s ease-in-out infinite, popIn 0.6s $ease-out 1s both;
+  }
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: $text;
+  opacity: 0;
+  animation: fadeInUp 0.6s $ease-out var(--delay, 0s) both;
+
+  &__dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  &__check {
+    width: 7px;
+    height: 4px;
+    border-left: 2px solid $green;
+    border-bottom: 2px solid $green;
+    transform: rotate(-45deg) translateY(-1px);
+  }
+
+  &:hover &__dot {
+    animation: pulseGlow 1.2s ease-out infinite;
+  }
+}
+
+// --------------------------------------------------------------------------
+// MISSION
+// --------------------------------------------------------------------------
+.mission {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 40px;
+  border-top: 1px solid $border;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 40px;
+  align-items: center;
+
+  &__visual {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: scale(0.8) rotate(-15deg);
+  }
+
+  &--visible &__visual {
+    animation: popIn 0.8s $ease-out both;
+  }
+
+  &__ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid $border;
+
+    &--outer {
+      inset: 0;
+      border-color: #2a3524;
+      animation: spinSlow 40s linear infinite;
+    }
+
+    &--mid {
+      inset: 45px;
+      border-width: 10px;
+      border-color: #3a4a2f;
+      animation: spinSlow 30s linear infinite reverse;
+    }
+
+    &--inner {
+      inset: 90px;
+      border-width: 10px;
+      border-color: #1a1f16;
+      background: $bg;
+      animation: pulseScale 2.4s ease-in-out infinite;
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    width: 90px;
+    height: 6px;
+    background: $green;
+    border-radius: 3px;
+    top: 45%;
+    left: 15%;
+    transform: rotate(-40deg);
+    transform-origin: left center;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: -6px;
+      top: -10px;
+      border-left: 20px solid $green;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+    }
+  }
+
+  &__content {
+    opacity: 0;
+  }
+
+  &--visible &__content {
+    animation: fadeInRight 0.8s $ease-out 0.2s both;
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  &__text {
+    color: $text-muted;
+    font-size: 16px;
+    max-width: 600px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// CARDS
+// --------------------------------------------------------------------------
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: $bg-card;
+  border: 1px solid $border;
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.35s $ease-out, border-color 0.35s, box-shadow 0.35s;
+
+  &--visible {
+    animation: fadeInUp 0.7s $ease-out var(--delay, 0s) both;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: $green;
+    box-shadow: 0 14px 30px rgba($green, 0.15);
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    border: 1.5px solid $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s $ease-out, background 0.4s;
+  }
+
+  &:hover &__icon {
+    transform: rotate(12deg) scale(1.1);
+    background: rgba($green, 0.1);
+  }
+
+  &__title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  &__text {
+    color: $text-muted;
+    font-size: 14px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// JOURNEY / TIMELINE
+// --------------------------------------------------------------------------
+.journey {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 0;
+  border-top: 1px solid $border;
+  text-align: center;
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 56px;
+    animation: fadeInUp 0.6s $ease-out both;
+  }
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+
+  &__line {
+    position: absolute;
+    top: 6px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 1px;
+    background: $border;
+    transform-origin: left center;
+    animation: drawLine 1.6s $ease-out 0.2s both;
+  }
+
+  &__item {
+    position: relative;
+    padding-top: 28px;
+    opacity: 0;
+  }
+
+  &__item--visible {
+    animation: fadeInUp 0.7s $ease-out var(--delay, 0s) both;
+  }
+
+  &__dot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: $green;
+  }
+
+  &__item--visible &__dot {
+    animation: pulseGlow 1.8s ease-out infinite 0.8s;
+  }
+
+  &__number {
+    color: $green;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__label {
+    color: $text-muted;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: 1.5px solid $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s $ease-out;
+  }
+
+  &__item:hover &__icon {
+    transform: translateY(-6px) rotate(-8deg);
+  }
+}
+
+// --------------------------------------------------------------------------
+// WHY
+// --------------------------------------------------------------------------
+.why {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 24px 30px;
+  text-align: center;
+
+  &__title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 26px;
+    opacity: 0;
+  }
+
+  &--visible &__title {
+    animation: fadeInUp 0.6s $ease-out both;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+  }
+
+  &--visible &__item {
+    animation: fadeInUp 0.55s $ease-out var(--delay, 0s) both;
+  }
+
+  &__dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__check {
+    width: 6px;
+    height: 3px;
+    border-left: 1.5px solid $green;
+    border-bottom: 1.5px solid $green;
+    transform: rotate(-45deg) translateY(-1px);
+  }
+
+  &__item:hover &__dot {
+    animation: pulseScale 0.6s ease-in-out infinite;
+  }
+}
+
+// --------------------------------------------------------------------------
+// CTA
+// --------------------------------------------------------------------------
+.cta {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 24px 60px;
+
+  &__box {
+    background: $bg-panel;
+    border: 1px solid $border;
+    border-radius: 14px;
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &--visible &__box {
+    animation: fadeInUp 0.8s $ease-out both;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1.5px solid $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    animation: float 3.5s ease-in-out infinite;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  &__text {
+    color: $text-muted;
+    font-size: 14px;
+    max-width: 420px;
+  }
+
+  &__button {
+    background: $green;
+    color: #08130a;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 26px;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s $ease-out, box-shadow 0.25s;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba($green, 0.35);
+    }
+
+    &:hover &-arrow {
+      animation: arrowMove 0.9s ease-in-out infinite;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(#fff, 0.4);
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    &:active::after {
+      animation: ripple 0.6s ease-out;
+    }
+  }
+
+  &__button-arrow {
+    display: inline-block;
+  }
+}
+
+// --------------------------------------------------------------------------
+// ICON GLYPHS (только div + css-фигуры, без svg)
+// --------------------------------------------------------------------------
+.icon-glyph {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $green;
+
+  &__shape {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  // target — концентрические круги
+  &--target &__shape {
+    border: 2px solid $green;
+    border-radius: 50%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 2px solid $green;
+      border-radius: 50%;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      background: $green;
+      border-radius: 50%;
+    }
+  }
+
+  // bolt — молния из двух полос
+  &--bolt &__shape {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 3px;
+      background: $green;
+      top: 4px;
+      left: 6px;
+      transform: skewX(-25deg);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 3px;
+      background: $green;
+      bottom: 4px;
+      left: 6px;
+      transform: skewX(-25deg);
+    }
+  }
+
+  // users — два кружка-головы
+  &--users &__shape,
+  &--user &__shape {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 2px solid $green;
+      top: 1px;
+      left: 7px;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 9px;
+      border: 2px solid $green;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      bottom: 0;
+      left: 3px;
+    }
+  }
+
+  // refresh — круговая стрелка
+  &--refresh &__shape {
+    border: 2px solid $green;
+    border-radius: 50%;
+    border-right-color: transparent;
+    animation: spinSlow 3s linear infinite;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -3px;
+      right: 1px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 6px solid $green;
+      transform: rotate(45deg);
+    }
+  }
+
+  // rocket
+  &--rocket &__shape {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 16px;
+      background: $green;
+      border-radius: 50% 50% 40% 40%;
+      top: 1px;
+      left: 7px;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: $bg;
+      border-radius: 50%;
+      top: 5px;
+      left: 9px;
+    }
+  }
+
+  // globe
+  &--globe &__shape {
+    border: 2px solid $green;
+    border-radius: 50%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -2px 8px;
+      border: 2px solid $green;
+      border-radius: 50%;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      left: -2px;
+      right: -2px;
+      height: 2px;
+      background: $green;
+    }
+  }
+
+  // trophy
+  &--trophy &__shape {
+    &::before {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 10px;
+      border: 2px solid $green;
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      top: 1px;
+      left: 5px;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 2px;
+      background: $green;
+      bottom: 4px;
+      left: 7px;
+      box-shadow: 0 4px 0 $green;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// адаптив
+// --------------------------------------------------------------------------
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .mission {
+    grid-template-columns: 1fr;
+  }
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .timeline {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 40px;
+
+    &__line {
+      display: none;
+    }
+  }
+  .cta__box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+  .hero__eyebrow,
+  .hero__heading {
+    font-size: 30px;
+  }
+}
+
+// уважение к reduced-motion
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,717 @@
+$color-bg: #0a0a0a;
+$color-bg-soft: #111111;
+$color-card: #141414;
+$color-border: #2a2a2a;
+$color-green: #7ed321;
+$color-green-soft: rgba(126, 211, 33, 0.12);
+$color-white: #ffffff;
+$color-text-muted: #9a9a9a;
+$color-text-faint: #707070;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin fade-in-up($delay: 0s, $distance: 24px) {
+  opacity: 0;
+  transform: translateY($distance);
+  animation: fadeInUp 0.7s ease-out $delay forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(126, 211, 33, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(126, 211, 33, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(126, 211, 33, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.Wrapper-Home {
+  margin-bottom: 15px;
+  background: $color-bg;
+
+  .Inner-Home {
+    width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+// ----------------------------------
+// Hero / Banner
+// ----------------------------------
+.Home-Desc-Banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 80px 30px;
+
+  .Home-Desc-Banner-Info {
+    display: flex;
+    flex-direction: column;
+    max-width: 540px;
+
+    .Home-Desc-Banner-Info-Title {
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: $color-white;
+      @include fade-in-up(0.05s);
+
+      .Span {
+        color: $color-green;
+      }
+    }
+
+    .Home-Desc-Banner-Info-Opis {
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: $color-text-muted;
+      @include fade-in-up(0.18s);
+    }
+
+    .Home-Desc-Banner-Info-Buttons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 30px;
+      @include fade-in-up(0.3s);
+
+      button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 24px;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 8px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+
+        &:hover {
+          opacity: 0.85;
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        svg {
+          transition: transform 0.2s ease;
+        }
+
+        &:hover svg {
+          transform: translateX(3px);
+        }
+      }
+
+      .Home-Desc-Banner-Info-Buttons-Primary {
+        background: $color-green;
+        color: #0a0a0a;
+      }
+
+      .Home-Desc-Banner-Info-Buttons-Secondary {
+        background: transparent;
+        color: $color-white;
+        border: 1px solid $color-border;
+
+        &:hover svg {
+          transform: none;
+        }
+      }
+    }
+
+    .Home-Desc-Banner-Info-Links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-top: 28px;
+      @include fade-in-up(0.42s);
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: $color-text-muted;
+
+        svg {
+          color: $color-green;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .Home-Desc-Banner-Image {
+    @include flex-center;
+    width: 460px;
+    height: 460px;
+    border-radius: 50%;
+    border: 1px solid $color-border;
+    opacity: 0;
+    animation:
+      fadeIn 0.9s ease-out 0.2s forwards,
+      pulseRing 2.4s ease-out 1.2s infinite;
+
+    img {
+      width: 70%;
+      object-fit: contain;
+    }
+  }
+}
+
+// ----------------------------------
+// Our Courses
+// ----------------------------------
+.Home-OurCourses-Block {
+  padding: 20px 80px;
+
+  .Home-OurCourses-Block-Header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    .Home-OurCourses-Block-Header-Title {
+      font-size: 32px;
+      font-weight: 600;
+      color: $color-white;
+    }
+
+    .Home-OurCourses-Block-Header-Opis {
+      margin-top: 10px;
+      font-size: 14px;
+      color: $color-text-faint;
+    }
+  }
+
+  .Home-OurCourses-Block-List {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    .Home-OurCourses-Block-List-Item {
+      background: $color-card;
+      border: 1px solid $color-border;
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{0.1 + ($i - 1) * 0.12}s;
+        }
+      }
+      min-height: 174px;
+
+      &:hover {
+        transform: translateY(-6px);
+        border-color: rgba(126, 211, 33, 0.4);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      }
+
+      .Home-OurCourses-Block-List-Item-Icon {
+        @include flex-center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: $color-green-soft;
+        color: $color-green;
+        font-size: 20px;
+        margin-bottom: 16px;
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
+      }
+
+      &:hover .Home-OurCourses-Block-List-Item-Icon {
+        transform: scale(1.1) rotate(-6deg);
+        background: rgba(126, 211, 33, 0.2);
+      }
+
+      .Home-OurCourses-Block-List-Item-Title {
+        font-size: 18px;
+        font-weight: 600;
+        color: $color-white;
+        margin-bottom: 10px;
+      }
+
+      .Home-OurCourses-Block-List-Item-Opis {
+        font-size: 14px;
+        line-height: 1.6;
+        color: $color-text-muted;
+        flex-grow: 1;
+      }
+
+      .Home-OurCourses-Block-List-Item-Link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 20px;
+        background: none;
+        border: none;
+        color: $color-green;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        align-self: flex-start;
+
+        svg {
+          transition: transform 0.2s ease;
+        }
+
+        &:hover {
+          text-decoration: underline;
+
+          svg {
+            transform: translateX(4px);
+          }
+        }
+      }
+    }
+  }
+}
+
+// ----------------------------------
+// Why Us
+// ----------------------------------
+.Home-WhyUs-Block {
+  padding: 20px 80px 30px;
+  text-align: center;
+
+  .Home-WhyUs-Block-Title {
+    font-size: 32px;
+    font-weight: 600;
+    color: $color-white;
+    margin-bottom: 50px;
+  }
+
+  .Home-WhyUs-Block-List {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+
+    .Home-WhyUs-Block-List-Item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+
+      @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{0.1 + ($i - 1) * 0.1}s;
+        }
+      }
+
+      .Home-WhyUs-Block-List-Item-Icon {
+        @include flex-center;
+        font-size: 28px;
+        color: $color-green;
+        margin-bottom: 16px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover .Home-WhyUs-Block-List-Item-Icon {
+        transform: scale(1.15);
+      }
+
+      .Home-WhyUs-Block-List-Item-Title {
+        font-size: 16px;
+        font-weight: 600;
+        color: $color-white;
+        margin-bottom: 8px;
+      }
+
+      .Home-WhyUs-Block-List-Item-Opis {
+        font-size: 13px;
+        line-height: 1.5;
+        color: $color-text-faint;
+        max-width: 200px;
+      }
+    }
+  }
+}
+
+// ----------------------------------
+// Stats / Info bar
+// ----------------------------------
+.Home-Info-Block {
+  background: $color-bg-soft;
+  border-top: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
+  padding: 20px 80px;
+
+  .Home-Info-Block-List {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    .Home-Info-Block-List-Item {
+      text-align: center;
+      padding: 0 20px;
+      border-right: 1px solid $color-border;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+
+      @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{0.1 + ($i - 1) * 0.1}s;
+        }
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+
+      .Home-Info-Block-List-Item-Value {
+        font-size: 28px;
+        font-weight: 700;
+        color: $color-green;
+        margin-bottom: 6px;
+      }
+
+      .Home-Info-Block-List-Item-Label {
+        font-size: 13px;
+        color: $color-text-muted;
+      }
+    }
+  }
+}
+
+// ----------------------------------
+// Learn About / Video preview
+// ----------------------------------
+.Home-LearnAbout-Block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 20px 80px;
+
+  .Home-LearnAbout-Block-Info {
+    max-width: 460px;
+    opacity: 0;
+    animation: fadeInUp 0.7s ease-out 0.1s forwards;
+
+    .Home-LearnAbout-Block-Info-Eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: $color-green;
+      margin-bottom: 14px;
+    }
+
+    .Home-LearnAbout-Block-Info-Title {
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: $color-white;
+    }
+
+    .Home-LearnAbout-Block-Info-Opis {
+      margin-top: 18px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: $color-text-muted;
+    }
+
+    .Home-LearnAbout-Block-Info-Button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 26px;
+      padding: 14px 24px;
+      background: $color-green;
+      color: #0a0a0a;
+      font-size: 15px;
+      font-weight: 500;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+      svg {
+        transition: transform 0.2s ease;
+      }
+
+      &:hover {
+        opacity: 0.85;
+        transform: translateY(-2px);
+
+        svg {
+          transform: scale(1.15);
+        }
+      }
+    }
+  }
+
+  .Home-LearnAbout-Block-Video {
+    position: relative;
+    width: 480px;
+    height: 320px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1a1a1a;
+    opacity: 0;
+    animation: fadeInUp 0.7s ease-out 0.25s forwards;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .Home-LearnAbout-Block-Video-Play {
+      @include flex-center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: $color-green;
+      color: #0a0a0a;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      animation: pulseRing 2.4s ease-out 1s infinite;
+      transition: transform 0.25s ease;
+
+      &:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+
+    .Home-LearnAbout-Block-Video-Caption {
+      position: absolute;
+      left: 16px;
+      bottom: 14px;
+
+      .Home-LearnAbout-Block-Video-Caption-Name {
+        font-size: 14px;
+        font-weight: 600;
+        color: $color-white;
+      }
+
+      .Home-LearnAbout-Block-Video-Caption-Role {
+        font-size: 12px;
+        color: $color-text-muted;
+      }
+    }
+  }
+}
+
+// ----------------------------------
+// Pricing card
+// ----------------------------------
+.Home-CoursePaket-Block {
+  padding: 20px 80px 30px;
+  text-align: center;
+
+  .Home-CoursePaket-Block-Header {
+    margin-bottom: 40px;
+
+    .Home-CoursePaket-Block-Header-Title {
+      font-size: 30px;
+      font-weight: 600;
+      color: $color-white;
+    }
+
+    .Home-CoursePaket-Block-Header-Opis {
+      margin-top: 10px;
+      font-size: 14px;
+      color: $color-text-faint;
+    }
+  }
+
+  .Home-CoursePaket-Block-Card {
+    width: 360px;
+    margin: 0 auto;
+    padding: 36px;
+    border: 1px solid $color-green;
+    border-radius: 14px;
+    background: $color-card;
+    opacity: 0;
+    animation: fadeInUp 0.7s ease-out 0.15s forwards;
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(126, 211, 33, 0.15);
+    }
+
+    .Home-CoursePaket-Block-Card-Label {
+      font-size: 14px;
+      color: $color-text-muted;
+      margin-bottom: 10px;
+    }
+
+    .Home-CoursePaket-Block-Card-Price {
+      font-size: 40px;
+      font-weight: 700;
+      color: $color-white;
+      margin-bottom: 24px;
+    }
+
+    .Home-CoursePaket-Block-Card-Features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+      text-align: left;
+
+      .Home-CoursePaket-Block-Card-Features-Item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: $color-text-muted;
+
+        svg {
+          color: $color-green;
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    .Home-CoursePaket-Block-Card-Button {
+      width: 100%;
+      padding: 14px 24px;
+      background: $color-green;
+      color: #0a0a0a;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+      &:hover {
+        opacity: 0.85;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// ----------------------------------
+// Join CTA
+// ----------------------------------
+.Home-Join-Block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 80px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(126, 211, 33, 0.08) 0%,
+    transparent 70%
+  );
+
+  .Home-Join-Block-Title {
+    max-width: 700px;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: $color-white;
+    opacity: 0;
+    animation: fadeInUp 0.7s ease-out 0.05s forwards;
+  }
+
+  .Home-Join-Block-Opis {
+    margin-top: 18px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: $color-text-muted;
+    opacity: 0;
+    animation: fadeInUp 0.7s ease-out 0.18s forwards;
+  }
+
+  .Home-Join-Block-Button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+    padding: 14px 28px;
+    background: $color-green;
+    color: #0a0a0a;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInUp 0.7s ease-out 0.3s forwards;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+
+    svg {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+
+      svg {
+        transform: translateX(3px);
+      }
+    }
+  }
+}

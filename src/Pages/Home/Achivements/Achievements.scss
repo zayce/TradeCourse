@@ -1,0 +1,384 @@
+// Achievements.scss
+
+$bg: #0a0a0a;
+$panel: rgba(255, 255, 255, 0.02);
+$border: rgba(255, 255, 255, 0.1);
+$border-soft: rgba(255, 255, 255, 0.05);
+$text: #ffffff;
+$text-muted: #9ca3af;
+$text-faint: #6b7280;
+$accent: #a3e635;
+$accent-soft: rgba(163, 230, 53, 0.1);
+$accent-glow: rgba(163, 230, 53, 0.35);
+$radius-lg: 16px;
+$radius-md: 12px;
+$radius-sm: 8px;
+
+@mixin card {
+  border: 1px solid $border;
+  background: $panel;
+  border-radius: $radius-lg;
+}
+
+.achievements {
+  background: $bg;
+  color: $text;
+  min-height: 100vh;
+
+  &__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+}
+
+// ---- Hero (People block) ----
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.15;
+
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
+
+    .highlight {
+      color: $accent;
+    }
+  }
+
+  &__text {
+    margin-top: 1.5rem;
+    color: $text-muted;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  &__note {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: $text-muted;
+
+    .check {
+      margin-top: 0.2rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid $accent;
+      color: $accent;
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.bars {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.5rem;
+  height: 18rem;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__avatar {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(163, 230, 53, 0.6);
+    background: $bg;
+    box-shadow: 0 0 20px $accent-glow;
+    color: $accent;
+
+    &--sm {
+      width: 48px;
+      height: 48px;
+    }
+    &--md {
+      width: 56px;
+      height: 56px;
+    }
+    &--lg {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  &__bar {
+    width: 5.5rem;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(to top, #000000, #141414);
+    border: 1px solid $border-soft;
+
+    &--sm {
+      height: 7rem;
+    }
+    &--md {
+      height: 11rem;
+    }
+    &--lg {
+      height: 15rem;
+    }
+  }
+}
+
+// ---- Stats block ----
+.stats {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 2rem;
+  @include card;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-right: 2px solid $border-soft;
+  }
+
+  .Stats-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(163, 230, 53, 0.5);
+    color: $accent;
+  }
+
+  &__value {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    color: #d1d5db;
+  }
+
+  &__sub {
+    font-size: 0.75rem;
+    color: $text-faint;
+  }
+}
+
+// ---- Section heading ----
+.section-heading {
+  margin-top: 5rem;
+  text-align: center;
+
+  h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    color: $text-muted;
+  }
+}
+
+// ---- Graduates grid ----
+.graduates {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.grad-card {
+  @include card;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid $border;
+  }
+
+  &__name {
+    font-weight: 600;
+  }
+
+  &__track {
+    font-size: 0.875rem;
+    color: $accent;
+  }
+
+  &__location {
+    margin-top: 0.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: $text-faint;
+  }
+
+  &__metrics {
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid $border;
+  }
+
+  &__metric-label {
+    font-size: 0.75rem;
+    color: $text-faint;
+  }
+
+  &__metric-value {
+    margin-top: 0.25rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+
+    &--accent {
+      color: $accent;
+    }
+  }
+
+  &__quote {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: $text-muted;
+    line-height: 1.6;
+  }
+}
+
+// ---- CTA buttons ----
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: $radius-sm;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+
+  &--outline {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    color: $text;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &--solid {
+    background: $accent;
+    color: #000000;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    white-space: nowrap;
+
+    &:hover {
+      background: #bef264;
+    }
+  }
+}
+
+.see-more {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+// ---- Bottom CTA banner ----
+.cta-banner {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem;
+  @include card;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: $accent-soft;
+    color: $accent;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  &__text {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: $text-muted;
+  }
+}

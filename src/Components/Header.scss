@@ -1,0 +1,41 @@
+.Wrapper-Header {
+  width: 1440px;
+  margin-bottom: 15px;
+  .Inner-Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    .Logo {
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .Inner-Header-Menu {
+      display: flex;
+      gap: 30px;
+      .Inner-Header-Menu-items {
+        font-size: 16px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          color: #7cff3a;
+        }
+      }
+    }
+    .Inner-Header-Button {
+      background: #7cff3a;
+      color: #050505;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        background: #6ae82a;
+      }
+    }
+  }
+}
